@@ -1,18 +1,30 @@
 [package]
 name = "trf"
-version = "1.0.0"
+version = "2.0.0"
 edition = "2021"
-authors = ["Rik Huijzer"]
+authors = ["Rik Huijzer", "Joey McGee (ATA-Termux enhancements)"]
 license = "MIT"
 
 [dependencies]
 anyhow = "1"
 clap = { version = "4.5.29", features = ["derive"] }
 futures-util = "0.3.31"
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "full"] }
 tracing-subscriber = "0.3"
 tracing = "0.1"
-transformrs = "0.6"
+transformers = "0.6"
+# New for MCP + Termux self-learning
+rmcp = { git = "https://github.com/modelcontextprotocol/rust-sdk", features = ["macros", "server", "stdio", "http"] }  # Official MCP SDK
+rusqlite = { version = "0.32", features = ["bundled"] }  # Persistent KB for learned tools
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.12", features = ["json"] }  # For git updates or extra
+regex = "1"
+# Existing + extended
+
+[[bin]]
+name = "ata"
+path = "src/main.rs"  # Will extend for new subcmds
 
 [dev-dependencies]
 assert_cmd = "2"
